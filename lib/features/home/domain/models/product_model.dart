@@ -4,8 +4,8 @@ class ProductModel {
   String? description;
   String? category;
   double? price;
-  RatingModel? rating; // ✅ updated
-  String? thumbnail;
+  RatingModel? rating;
+  String? image;
   List<String>? images;
 
   ProductModel({
@@ -15,7 +15,7 @@ class ProductModel {
     this.category,
     this.price,
     this.rating,
-    this.thumbnail,
+    this.image,
     this.images,
   });
 
@@ -28,7 +28,7 @@ class ProductModel {
         rating: json['rating'] != null
             ? RatingModel.fromJson(json['rating'])
             : null,
-        thumbnail: json['image'],
+        image: json['image'],
         images: (json['images'] as List?)?.map((e) => e.toString()).toList(),
       );
 
@@ -39,7 +39,7 @@ class ProductModel {
         'category': category,
         'price': price,
         'rating': rating?.toJson(),
-        'image': thumbnail,
+        'image': image,
         'images': images,
       };
 }

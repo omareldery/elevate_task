@@ -14,11 +14,19 @@ class HomeController extends GetxController implements GetxService {
 
   bool get isLoading => _isLoading;
   String? error;
+  final Map<int, bool> selectedMap = {};
+
+  bool isSelected(int index) => selectedMap[index] ?? false;
 
   @override
   void onInit() {
     super.onInit();
     getProducts();
+  }
+
+  void toggleFavorite(int index) {
+    selectedMap[index] = !(selectedMap[index] ?? false);
+    update();
   }
 
   Future<void> getProducts() async {
