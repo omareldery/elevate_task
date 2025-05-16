@@ -2,8 +2,10 @@ import 'package:elevate_task/features/home/domain/repos/product_repo_interface.d
 import 'package:get/get.dart';
 import '../domain/models/product_model.dart';
 
-class HomeController extends GetxController {
-  final ProductRepoInterface _productRepository = Get.find();
+class HomeController extends GetxController implements GetxService {
+  final ProductRepoInterface productRepoInterface;
+
+  HomeController(this.productRepoInterface);
 
   List<ProductModel> _products = [];
 
@@ -25,7 +27,7 @@ class HomeController extends GetxController {
     update();
 
     try {
-      _products = await _productRepository.getProducts();
+      _products = await productRepoInterface.getProducts();
     } catch (e) {
       error = e.toString();
     } finally {

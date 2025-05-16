@@ -3,18 +3,10 @@ class ProductModel {
   String? title;
   String? description;
   String? category;
-  num? price;
-  num? discountPercentage;
-  num? rating;
-  num? stock;
-  num? weight;
-  String? warrantyInformation;
-  String? shippingInformation;
-  String? availabilityStatus;
-  String? returnPolicy;
-  num? minimumOrderQuantity;
-  List<String>? images;
+  double? price;
+  RatingModel? rating; // ✅ updated
   String? thumbnail;
+  List<String>? images;
 
   ProductModel({
     this.id,
@@ -22,17 +14,9 @@ class ProductModel {
     this.description,
     this.category,
     this.price,
-    this.discountPercentage,
     this.rating,
-    this.stock,
-    this.weight,
-    this.warrantyInformation,
-    this.shippingInformation,
-    this.availabilityStatus,
-    this.returnPolicy,
-    this.minimumOrderQuantity,
-    this.images,
     this.thumbnail,
+    this.images,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
@@ -40,20 +24,12 @@ class ProductModel {
         title: json['title'],
         description: json['description'],
         category: json['category'],
-        price: json['price'],
-        discountPercentage: json['discountPercentage'],
-        rating: json['rating'],
-        stock: json['stock'],
-        weight: json['weight'],
-        warrantyInformation: json['warrantyInformation'],
-        shippingInformation: json['shippingInformation'],
-        availabilityStatus: json['availabilityStatus'],
-        returnPolicy: json['returnPolicy'],
-        minimumOrderQuantity: json['minimumOrderQuantity'],
-        images: (json['images'] as List<dynamic>?)
-            ?.map((e) => e as String)
-            .toList(),
-        thumbnail: json['thumbnail'],
+        price: (json['price'] as num?)?.toDouble(),
+        rating: json['rating'] != null
+            ? RatingModel.fromJson(json['rating'])
+            : null,
+        thumbnail: json['image'],
+        images: (json['images'] as List?)?.map((e) => e.toString()).toList(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -62,16 +38,25 @@ class ProductModel {
         'description': description,
         'category': category,
         'price': price,
-        'discountPercentage': discountPercentage,
-        'rating': rating,
-        'stock': stock,
-        'weight': weight,
-        'warrantyInformation': warrantyInformation,
-        'shippingInformation': shippingInformation,
-        'availabilityStatus': availabilityStatus,
-        'returnPolicy': returnPolicy,
-        'minimumOrderQuantity': minimumOrderQuantity,
+        'rating': rating?.toJson(),
+        'image': thumbnail,
         'images': images,
-        'thumbnail': thumbnail,
+      };
+}
+
+class RatingModel {
+  final double? rate;
+  final int? count;
+
+  RatingModel({this.rate, this.count});
+
+  factory RatingModel.fromJson(Map<String, dynamic> json) => RatingModel(
+        rate: (json['rate'] as num?)?.toDouble(),
+        count: (json['count'] as num?)?.toInt(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'rate': rate,
+        'count': count,
       };
 }
