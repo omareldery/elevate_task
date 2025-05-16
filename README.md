@@ -1,16 +1,12 @@
 # elevate_task
 
-A new Flutter project.
+This app displays a grid of products that are fetched from an API
+and allows users to view product details with favorites support.
 
-## Getting Started
+## Screenshots
 
-This project is a starting point for a Flutter application.
+### Home Screen
+![Home Screen](![Screenshot_20250516_050106.png](Screenshot_20250516_050106.png))
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Product Card
+![Product Card](![Screenshot_20250516_050222.png](../../Downloads/Screenshot_20250516_050222.png))
